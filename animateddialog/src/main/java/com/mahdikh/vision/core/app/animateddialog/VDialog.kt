@@ -2,6 +2,7 @@ package com.mahdikh.vision.core.app.animateddialog
 
 import android.content.Context
 import android.content.DialogInterface
+import androidx.annotation.CallSuper
 import androidx.appcompat.app.AlertDialog
 
 open class VDialog : AlertDialog {
@@ -15,13 +16,13 @@ open class VDialog : AlertDialog {
         cancelListener: DialogInterface.OnCancelListener?
     ) : super(context, cancelable, cancelListener)
 
-    fun dismissNow() {
+    @CallSuper
+    open fun forceDismiss() {
         dismissible = true
         dismiss()
     }
 
     protected open fun handleDismiss() {
-
     }
 
     override fun dismiss() {

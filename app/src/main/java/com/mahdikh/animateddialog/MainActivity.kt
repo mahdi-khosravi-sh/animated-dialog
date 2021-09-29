@@ -1,12 +1,10 @@
 package com.mahdikh.animateddialog
 
-import android.content.DialogInterface
 import android.os.Bundle
 import android.view.View
-import android.view.animation.AnticipateOvershootInterpolator
 import androidx.appcompat.app.AppCompatActivity
 import com.mahdikh.vision.core.app.animateddialog.AnimatedDialog
-import com.mahdikh.vision.core.app.animateddialog.animator.FoldAnimator
+import com.mahdikh.vision.core.app.animateddialog.animator.ScaleAnimator
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -19,29 +17,14 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun showDialog() {
-        val dialog = AnimatedDialog(this, R.layout.dialog_layout)
-
-        dialog.enterAnimator = FoldAnimator().apply {
-            interpolator = AnticipateOvershootInterpolator()
-            duration = 400
-        }
-
-        dialog.exitAnimator = FoldAnimator().apply {
-            interpolator = AnticipateOvershootInterpolator()
-            duration = 400
-        }
-        dialog.setMessage(
-            "My name is mehdi khosravi. " +
-                    "whats your name My name is mehdi khosravi. " +
-                    "whats your name My name is mehdi khosravi. whats your name "
-        )
+        val dialog = AnimatedDialog(this)
+        dialog.exitAnimator = ScaleAnimator()
+        dialog.enterAnimator = ScaleAnimator()
         dialog.setTitle("Hello World")
-        dialog.setButton(DialogInterface.BUTTON_NEGATIVE, "Cancel") { _, _ -> dialog.dismiss() }
-        dialog.setButton(DialogInterface.BUTTON_POSITIVE, "OK") { _, _ -> dialog.dismiss() }
-        dialog.setButton(DialogInterface.BUTTON_NEUTRAL, "Later") { _, _ -> dialog.dismiss() }
-        dialog.dimAmount = 0.5F
-        dialog.setIcon(R.drawable.ic_launcher_background)
-
+        dialog.setMessage("My name is mehdi khosravi")
+        dialog.setNegativeButton("Cancel") { p0, _ -> p0.dismiss() }
+        dialog.setPositiveButton("OK") { p0, _ -> p0.dismiss() }
+        dialog.setNeutralButton("Later") { p0, _ -> p0.dismiss() }
         dialog.show()
     }
 }

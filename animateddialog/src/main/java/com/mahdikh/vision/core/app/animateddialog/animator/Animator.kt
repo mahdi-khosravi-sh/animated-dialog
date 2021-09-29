@@ -8,7 +8,7 @@ abstract class Animator {
     private lateinit var animator: ViewPropertyAnimator
     var mode: Int = -1
     var startDelay: Long = 0
-    var duration: Long = 300
+    var duration: Long = 200
     var interpolator: TimeInterpolator? = null
 
     private fun init(view: View) {

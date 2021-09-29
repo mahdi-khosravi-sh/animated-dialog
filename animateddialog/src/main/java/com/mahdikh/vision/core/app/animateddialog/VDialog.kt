@@ -22,7 +22,24 @@ open class VDialog : AlertDialog {
         dismiss()
     }
 
+    @CallSuper
+    open fun forceCancel() {
+        dismissible = true
+        cancel()
+    }
+
     protected open fun handleDismiss() {
+    }
+
+    protected open fun handleCancel() {
+    }
+
+    override fun cancel() {
+        if (dismissible) {
+            super.cancel()
+            return
+        }
+        handleCancel()
     }
 
     override fun dismiss() {

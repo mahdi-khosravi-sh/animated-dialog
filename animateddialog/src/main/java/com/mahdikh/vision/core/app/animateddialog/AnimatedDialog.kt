@@ -39,16 +39,32 @@ open class AnimatedDialog : VDialog {
     }
 
     override fun handleDismiss() {
+        handleClose(false)
+    }
+
+    override fun handleCancel() {
+        handleClose(true)
+    }
+
+    private fun handleClose(cancel: Boolean) {
         if (onDismissing) return
         val window = window
         if (window != null) {
             exitAnimator?.run {
                 onDismissing = true
                 animate(window.decorView) {
-                    forceDismiss()
+                    if (cancel) {
+                        forceCancel()
+                    } else {
+                        forceDismiss()
+                    }
                 }
             } ?: kotlin.run {
-                forceDismiss()
+                if (cancel) {
+                    forceCancel()
+                } else {
+                    forceDismiss()
+                }
             }
         }
     }

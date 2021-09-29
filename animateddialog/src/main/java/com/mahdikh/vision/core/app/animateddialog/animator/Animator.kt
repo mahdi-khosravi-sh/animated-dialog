@@ -35,6 +35,21 @@ abstract class Animator {
 
     protected abstract fun onBeforeAnimate(view: View)
 
+    fun setDuration(duration: Long): Animator {
+        this.duration = duration
+        return this
+    }
+
+    fun setInterpolator(interpolator: TimeInterpolator): Animator {
+        this.interpolator = interpolator
+        return this
+    }
+
+    fun setStartDelay(startDelay: Long): Animator {
+        this.startDelay = startDelay
+        return this
+    }
+
     companion object {
         const val MODE_IN = 0
         const val MODE_OUT = 1

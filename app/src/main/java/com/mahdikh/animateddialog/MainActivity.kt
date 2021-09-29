@@ -4,7 +4,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.mahdikh.vision.core.app.animateddialog.AnimatedDialog
-import com.mahdikh.vision.core.app.animateddialog.animator.ScaleAnimator
+import com.mahdikh.vision.core.app.animateddialog.animator.FoldYAnimator
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -17,14 +17,9 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun showDialog() {
-        val dialog = AnimatedDialog(this)
-        dialog.exitAnimator = ScaleAnimator()
-        dialog.enterAnimator = ScaleAnimator()
-        dialog.setTitle("Hello World")
-        dialog.setMessage("My name is mehdi khosravi")
-        dialog.setNegativeButton("Cancel") { p0, _ -> p0.dismiss() }
-        dialog.setPositiveButton("OK") { p0, _ -> p0.dismiss() }
-        dialog.setNeutralButton("Later") { p0, _ -> p0.dismiss() }
-        dialog.show()
+        AnimatedDialog(this)
+            .setView(R.layout.dialog_layout)
+            .setEnterAnimator(FoldYAnimator())
+            .setExitAnimator(FoldYAnimator()).show()
     }
 }

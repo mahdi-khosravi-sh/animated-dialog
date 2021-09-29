@@ -7,7 +7,6 @@ import android.graphics.drawable.Drawable
 import android.os.Message
 import android.view.Gravity
 import android.view.LayoutInflater
-import androidx.annotation.CallSuper
 import androidx.annotation.ColorInt
 import androidx.annotation.DrawableRes
 import androidx.annotation.FloatRange
@@ -16,7 +15,6 @@ import com.mahdikh.vision.core.app.animateddialog.animator.Animator
 
 open class AnimatedDialog : VDialog {
     private var onDismissing = false
-    var callback: DialogCallback? = null
     var enterAnimator: Animator? = null
     var exitAnimator: Animator? = null
 
@@ -29,13 +27,11 @@ open class AnimatedDialog : VDialog {
     ) : super(context, cancelable, cancelListener)
 
     final override fun show() {
-        onBeforeShow()
         super.show()
         val window = window
         if (window != null) {
             enterAnimator?.animate(window.decorView)
         }
-        onShow()
     }
 
     override fun handleDismiss() {
@@ -147,32 +143,12 @@ open class AnimatedDialog : VDialog {
         return this
     }
 
-    override fun forceDismiss() {
-        super.forceDismiss()
-        onDismiss()
-    }
-
     open fun forceDismiss(dismissAction: Runnable) {
         super.setOnDismissListener {
             dismissAction.run()
             onDismissing = false
         }
         forceDismiss()
-    }
-
-    @CallSuper
-    protected open fun onBeforeShow() {
-        callback?.onBeforeShow()
-    }
-
-    @CallSuper
-    protected open fun onShow() {
-        callback?.onShow()
-    }
-
-    @CallSuper
-    protected open fun onDismiss() {
-        callback?.onDismiss()
     }
 
     open fun setView(layoutResID: Int): AnimatedDialog {
@@ -226,29 +202,6 @@ open class AnimatedDialog : VDialog {
     open fun setBackgroundDrawable(drawable: Drawable?): AnimatedDialog {
         window?.setBackgroundDrawable(drawable)
         return this
-    }
-
-    @Deprecated("")
-    final override fun setOnDismissListener(listener: DialogInterface.OnDismissListener?) {
-
-    }
-
-    @Deprecated("")
-    final override fun setOnShowListener(listener: DialogInterface.OnShowListener?) {
-
-    }
-
-    open fun setDialogCallBack(dialogCallback: DialogCallback): AnimatedDialog {
-        this.callback = dialogCallback
-        return this
-    }
-
-    interface DialogCallback {
-        fun onBeforeShow() {}
-
-        fun onShow() {}
-
-        fun onDismiss() {}
     }
 
     @kotlin.annotation.Retention(AnnotationRetention.SOURCE)

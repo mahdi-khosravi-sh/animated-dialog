@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">AnimatedDialog</string>
+    <string name="hi_animated_dialog">Hi Animated Dialog</string>
 </resources>

@@ -1,11 +1,11 @@
 package com.mahdikh.vision.core.app.animateddialog
 
+import android.app.Dialog
 import android.content.Context
 import android.content.DialogInterface
 import androidx.annotation.CallSuper
-import androidx.appcompat.app.AlertDialog
 
-open class VDialog : AlertDialog {
+open class VDialog : Dialog {
     var dismissible = false
 
     constructor(context: Context) : super(context)

@@ -4,9 +4,7 @@ import android.content.Context
 import android.content.DialogInterface
 import android.graphics.drawable.ColorDrawable
 import android.graphics.drawable.Drawable
-import android.os.Message
 import android.view.Gravity
-import android.view.LayoutInflater
 import androidx.annotation.ColorInt
 import androidx.annotation.DrawableRes
 import androidx.annotation.FloatRange
@@ -94,72 +92,6 @@ open class AnimatedDialog : VDialog {
         return this
     }
 
-    open fun setPositiveButton(
-        text: CharSequence?,
-        listener: DialogInterface.OnClickListener
-    ): AnimatedDialog {
-        setButton(DialogInterface.BUTTON_POSITIVE, text, listener)
-        return this
-    }
-
-    open fun setNegativeButton(
-        text: CharSequence?,
-        listener: DialogInterface.OnClickListener
-    ): AnimatedDialog {
-        setButton(DialogInterface.BUTTON_NEGATIVE, text, listener)
-        return this
-    }
-
-    open fun setNeutralButton(
-        text: CharSequence?,
-        listener: DialogInterface.OnClickListener
-    ): AnimatedDialog {
-        setButton(DialogInterface.BUTTON_NEUTRAL, text, listener)
-        return this
-    }
-
-    open fun setPositiveButton(text: CharSequence?, msg: Message): AnimatedDialog {
-        setButton(DialogInterface.BUTTON_POSITIVE, text, msg)
-        return this
-    }
-
-    open fun setNegativeButton(text: CharSequence?, msg: Message): AnimatedDialog {
-        setButton(DialogInterface.BUTTON_NEGATIVE, text, msg)
-        return this
-    }
-
-    open fun setNeutralButton(text: CharSequence?, msg: Message): AnimatedDialog {
-        setButton(DialogInterface.BUTTON_NEUTRAL, text, msg)
-        return this
-    }
-
-    open fun setPositiveButton(
-        text: CharSequence?,
-        icon: Drawable?,
-        listener: DialogInterface.OnClickListener
-    ): AnimatedDialog {
-        setButton(DialogInterface.BUTTON_POSITIVE, text, icon, listener)
-        return this
-    }
-
-    open fun setNegativeButton(
-        text: CharSequence?,
-        icon: Drawable?,
-        listener: DialogInterface.OnClickListener
-    ): AnimatedDialog {
-        setButton(DialogInterface.BUTTON_NEGATIVE, text, icon, listener)
-        return this
-    }
-
-    open fun setNeutralButton(
-        text: CharSequence?,
-        icon: Drawable?,
-        listener: DialogInterface.OnClickListener
-    ): AnimatedDialog {
-        setButton(DialogInterface.BUTTON_NEUTRAL, text, icon, listener)
-        return this
-    }
-
     open fun forceDismiss(dismissAction: Runnable) {
         super.setOnDismissListener {
             dismissAction.run()
@@ -169,11 +101,7 @@ open class AnimatedDialog : VDialog {
     }
 
     open fun setView(layoutResID: Int): AnimatedDialog {
-        super.setView(
-            LayoutInflater.from(context).inflate(
-                layoutResID, null, false
-            )
-        )
+        setContentView(layoutResID)
         return this
     }
 

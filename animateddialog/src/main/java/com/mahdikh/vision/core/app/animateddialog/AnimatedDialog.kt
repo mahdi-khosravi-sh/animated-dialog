@@ -32,7 +32,24 @@ open class AnimatedDialog : VDialog {
         if (window != null) {
             enterAnimator?.animate(window.decorView)
         }
+        onShow()
     }
+
+    override fun cancel() {
+        super.cancel()
+        onCancel()
+    }
+
+    override fun dismiss() {
+        super.dismiss()
+        onDismiss()
+    }
+
+    open fun onShow() {}
+
+    open fun onCancel() {}
+
+    open fun onDismiss() {}
 
     override fun handleDismiss() {
         handleClose(false)
